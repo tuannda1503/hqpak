@@ -28,6 +28,7 @@ return new class extends Migration
             $table->integer('width');
             $table->integer('height');
             $table->string('material');
+            $table->string('payment');
             $table->text('note');
             $table->timestamps();
         });
