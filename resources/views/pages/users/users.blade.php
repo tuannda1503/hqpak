@@ -54,7 +54,7 @@
                                                 <span class="text-secondary text-xs font-weight-bold">{{$user->role}}</span>
                                             </td>
                                             <td class="align-middle">
-                                                <a href="{{ route('users/$user->id') }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                                <a href="{{ route('user-detail'), $user->id }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                                     Edit
                                                 </a>
                                             </td>
