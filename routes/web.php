@@ -48,8 +48,8 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.billing');
 	})->name('billing');
 	Route::get('tables', [UserController::class, 'index'])->name('tables');
-	Route::get('users', [UserController::class, 'index'])->name('users');
-	Route::post('user/:id', [ProfileController::class, 'index'])->name('user-detail');
+	
+
 	Route::get('rtl', function () {
 		return view('pages.rtl');
 	})->name('rtl');
@@ -71,4 +71,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('user-profile', function () {
 		return view('pages.laravel-examples.user-profile');
 	})->name('user-profile');
+
+	// Route::get('users', [UserController::class, 'index'])->name('users');
+	// Route::get('user/{id}', [UserController::class, 'store'])->name('user-detail');
+	// Route::patch('user-update/{id}', [UserController::class, 'update'])->name('user-update');
+
+	Route::resource('users', 'UserController');
 });

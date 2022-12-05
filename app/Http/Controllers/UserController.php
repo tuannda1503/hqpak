@@ -14,10 +14,31 @@ class UserController extends Controller
         return view('pages.users.users', compact('users'));
     }
 
-    public function store(Request $request)
+    public function edit(Request $request)
     {
         $user = User::find($request->id);
 
         return view('pages.users.user-detail', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::find($request->id);
+        $request->validate([
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'name' => 'required',
+            'phone' => 'required|max:10',
+            'about' => 'required:max:150',
+            'location' => 'required'
+        ]);
+
+        $user->email = $request->email;
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->about = $request->about;
+        $user->location = $request->location;
+
+        $user->save();
+        return back()->withStatus('Profile successfully updated.');
     }
 }
