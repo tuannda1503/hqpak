@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,7 @@ Route::get('/', function () {
 });
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
@@ -48,7 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.billing');
 	})->name('billing');
 	Route::get('tables', [UserController::class, 'index'])->name('tables');
-	
+
 
 	Route::get('rtl', function () {
 		return view('pages.rtl');
@@ -72,9 +74,19 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.laravel-examples.user-profile');
 	})->name('user-profile');
 
-	// Route::get('users', [UserController::class, 'index'])->name('users');
-	// Route::get('user/{id}', [UserController::class, 'store'])->name('user-detail');
-	// Route::patch('user-update/{id}', [UserController::class, 'update'])->name('user-update');
+	Route::get('users', [UserController::class, 'index'])->name('users.index');
+	Route::get('user/{id}', [UserController::class, 'show'])->name('user-detail');
+	Route::patch('user-update/{id}', [UserController::class, 'update'])->name('user-update');
 
-	Route::resource('users', 'UserController');
+	Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
+	Route::get('customer/{id}', [CustomerController::class, 'show'])->name('customer-detail');
+	Route::get('customer-create', [CustomerController::class, 'store'])->name('customer-create');
+	Route::post('customer-create', [CustomerController::class, 'create'])->name('customer.create');
+	Route::patch('customer-update/{id}', [CustomerController::class, 'update'])->name('customer-update');
+
+	Route::get('products', [ProductController::class, 'index'])->name('products.index');
+	Route::get('product/{id}', [ProductController::class, 'show'])->name('product-detail');
+	Route::get('product-create', [ProductController::class, 'store'])->name('product-create');
+	Route::post('product-create', [ProductController::class, 'create'])->name('product.create');
+	Route::patch('product-update/{id}', [ProductController::class, 'update'])->name('product-update');
 });

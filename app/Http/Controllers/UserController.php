@@ -14,7 +14,7 @@ class UserController extends Controller
         return view('pages.users.users', compact('users'));
     }
 
-    public function edit(Request $request)
+    public function show(Request $request)
     {
         $user = User::find($request->id);
 
@@ -23,9 +23,9 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $user = User::find($request->id);
+        $user = User::find($id);
         $request->validate([
-            'email' => 'required|email|unique:users,email,'.$user->id,
+            'email' => 'required|email|unique:users,email,' . $id,
             'name' => 'required',
             'phone' => 'required|max:10',
             'about' => 'required:max:150',
@@ -39,6 +39,6 @@ class UserController extends Controller
         $user->location = $request->location;
 
         $user->save();
-        return back()->withStatus('Profile successfully updated.');
+        return back()->withStatus('User successfully updated.');
     }
 }
