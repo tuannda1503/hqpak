@@ -24,6 +24,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
 	return redirect('sign-in');
@@ -89,4 +90,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('product-create', [ProductController::class, 'store'])->name('product-create');
 	Route::post('product-create', [ProductController::class, 'create'])->name('product.create');
 	Route::patch('product-update/{id}', [ProductController::class, 'update'])->name('product-update');
+
+	Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+	Route::get('order/{id}', [OrderController::class, 'show'])->name('order-detail');
+	Route::get('order-create', [OrderController::class, 'store'])->name('order-create');
+	Route::post('order-create', [OrderController::class, 'create'])->name('order.create');
+	Route::patch('order-update/{id}', [OrderController::class, 'update'])->name('order-update');
 });
